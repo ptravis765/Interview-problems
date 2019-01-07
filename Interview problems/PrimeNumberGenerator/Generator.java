@@ -1,15 +1,19 @@
 import java.util.*;
 /**
- * Takes in 2 integer values from the user and returns an ordered list of
- * prime numbers that are between the two numbers
+ * Write a description of class Generator here.
  *
- * @author Travis Peterson
- * @version 1/7/19
+ * Travis Peterson
+ * 1/7/19
  */
-public class Generator
+public class Generator implements PrimeNumberGenerator
 {
-    public interface PrimeNumberGenerator {
-        List<Integer> generate(int startingValue, int endingValue);
-        Boolean isPRime(int value);
+    public Boolean isPRime(int value)
+    {
+        return false;
+    }
+    
+    public List<Integer> generate(int startingValue, int endingValue)
+    {
+        return 0;
     }
 }
