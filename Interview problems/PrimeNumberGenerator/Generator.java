@@ -10,7 +10,11 @@ public class Generator implements PrimeNumberGenerator
     public Boolean isPRime(int number)
     {
         boolean skip = false;
-        for(int i = 2; i < number/2; i++)
+        if(number == 1)
+        {
+            return false;
+        }
+        for(int i = 2; i < (number/2)+1; i++)
         {
             if(number%i == 0)
             {
@@ -19,21 +23,21 @@ public class Generator implements PrimeNumberGenerator
         }
         if(!skip)
         {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
     
     public List<Integer> generate(int startingValue, int endingValue)
     {
-        List<Integer> tmp = new ArrayList<>(endingValue - startingValue + 1);
+        List<Integer> generatedList = new ArrayList<>(endingValue - startingValue + 1);
         for(int i = startingValue; i <= endingValue; i++)
         {
             if(isPRime(i))
             {
-                tmp.add(i);
+                generatedList.add(i);
             }
         }
-        return tmp;
+        return generatedList;
     }
 }

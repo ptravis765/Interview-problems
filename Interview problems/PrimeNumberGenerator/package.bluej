@@ -1,4 +1,7 @@
 #BlueJ package file
+dependency1.from=main
+dependency1.to=Generator
+dependency1.type=UsesDependency
 editor.fx.0.height=747
 editor.fx.0.width=818
 editor.fx.0.x=1087
@@ -13,7 +16,7 @@ package.editor.x=120
 package.editor.y=120
 package.frame.height=600
 package.frame.width=800
-package.numDependencies=0
+package.numDependencies=1
 package.numTargets=3
 package.showExtends=true
 package.showUses=true
@@ -28,8 +31,8 @@ target1.name=main
 target1.showInterface=false
 target1.type=ClassTarget
 target1.width=80
-target1.x=350
-target1.y=70
+target1.x=430
+target1.y=110
 target2.height=50
 target2.name=PrimeNumberGenerator
 target2.showInterface=false

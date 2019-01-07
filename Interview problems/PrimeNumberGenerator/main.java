@@ -50,8 +50,7 @@ public class main
         }
         
         
-        System.out.println();
-        System.out.print("Enter the second number: ");
+        System.out.print("\nEnter the second number: ");
         number = scanner.next();
         cont = isInteger(number);
         if(cont){
@@ -73,9 +72,11 @@ public class main
             int tmp = num2;
             num2 = num1;
             num1 = tmp;
-        }
+        } 
         
+        Generator generator = new Generator();
         
-        System.out.println("We will be looking at values between " + num1 + " and " + num2); 
+        List<Integer> generatedList = generator.generate(num1,num2);
+        System.out.println("\n" + generator.generate(num1,num2));
     }
 }
