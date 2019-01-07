@@ -1,7 +1,5 @@
 import java.io.*;
 import java.util.*;
-//import java.util.StringTokenizer;
-//import java.util.Scanner;
 /**
  * Write a description of class main here.
  *
