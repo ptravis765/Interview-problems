@@ -1,12 +1,6 @@
 import React from "react"
 
 function memberLayout(props){
-
-	const completedStyle = {
-		fontStyle: "italic",
-		color: "#cdcdcd",
-		textDecoration: "line-through"
-	}
 	
 
 	return(
