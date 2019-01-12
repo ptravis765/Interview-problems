@@ -1,0 +1,10 @@
+/*body{
+	display: flex;
+	align-items: center;
+	justify-content: 100vh;
+	margin: 0;
+}*/
+
+.navbar {
+	background-color: purple;
+}
