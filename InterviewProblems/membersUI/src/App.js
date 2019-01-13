@@ -1,9 +1,9 @@
 
 import React, {Component} from 'react';
 //import jquery from 'jquery';
-import axios from 'axios';
+//import axios from 'axios';
 //import {View, Text, StyleSheet, TextInput, TouchableOpacity, ActivityIndicator, Platform} from 'react-native';
-const $ = window.$;
+//const $ = window.$;
 
 //import members from "./Components/members.js"
 //import memberLayout from "./Components/memberLayout.js"
@@ -40,7 +40,14 @@ class App extends Component{
 			town: "",
 			sort: "Sort By",
 			members: [],
-			array: []
+			array: [],
+			member:{
+				last_name: '',
+				first_name: '',
+				email_address: '',
+				position: '',
+				town: ''
+			}
 		}
 		this.handleChange = this.handleChange.bind(this)
 		this.handleSubmit = this.handleSubmit.bind(this)
@@ -62,12 +69,13 @@ class App extends Component{
 	}
 
 	handleSubmit(event){
+		const {member} = this.state;
 		/*var data = require('./members.json');
 		for(var i = 0; i < data.length; i++){
 			var obj = data[i];
 			console.log("Name: " + obj.last_name);
 		}*/
-		if(this.last.value === "" || this.first.value === "" || this.mail.value === "")
+		if(member.last_name === "" || member.first_name === "" || member.email_address === "")
 		{
 			alert("Enter a value in the required fields:\n\n Last Name   First Name   Email Address");
 		}else{
@@ -78,8 +86,8 @@ class App extends Component{
 				position: this.pos.value,
 				town: this.town.value
 			};*/
-			axios.post(
-				'./submit.php',{
+			/*axios.post(
+				'http://localhost/phpmyadmin/my-app/src/submit.php',{
 					form_data:{
 						last_name: this.last.value,
 						first_name: this.first.value,
@@ -94,11 +102,9 @@ class App extends Component{
 				console.log(response)
 				console.log(response.form_data)
 				this.filter = response.form_data
-			})
-			/*$.ajax({
-
-			});*/
-
+			})*/
+			this.addMember();
+			window.location.reload(false);
 
 			alert('the values are: ' + this.last.value + ', ' + this.first.value + ', ' + this.mail.value + ', ' + this.pos.value + ', ' + this.town.value);
 		}
@@ -137,7 +143,7 @@ class App extends Component{
     				data:findresponse
     			});
     		})*/
-    	axios.get('./members.json')
+    	/*axios.get('./members.json')
     		.then(res =>{
     			console.log(res.data[0].last_name);
     			this.setState(
@@ -145,7 +151,10 @@ class App extends Component{
     			);
     		//this.setState({members: res.data});
     		})
-    		.catch((err)=>{})
+    		.catch((err)=>{})*/
+    		
+    	this.getMembers();
+  
 	}
 
 	handleMembers(){
@@ -158,9 +167,26 @@ class App extends Component{
 		})
 	}
 
+	//getMembers = _=>
+	getMembers(){
+    fetch('http://localhost:5000/description')
+      .then(response => response.json())
+      .then(response => this.setState({members: response.data}))
+      .catch(err => console.error(err))
+  	}
+  	renderMember = ({last_name,first_name,email_address,position,town}) => <div name = {last_name}><br/>{last_name} {first_name}<br/>{email_address}<br/>{position}, {town}<br/></div>
+  	
+  	addMember() {
+    	const {member} = this.state;
+    	fetch(`http://localhost:5000/description/add?last_name=${member.last_name}&first_name=${member.first_name}&email_address=${member.email_address}&position=${member.position}&town=${member.town}`)     	
+      	.then(response => response.json())
+      	.then(this.getProducts)
+      	.catch(err => console.error(err))
+  	}
+
 	render(){
-		console.log(this.state.array);
-		//const memberComponents = members.map(mem => <memberLayout key = {mem.last_name} first_name={mem.first_name}/>)
+		const {members, member} = this.state;
+		
 	
 		return(
 			<main>
@@ -171,10 +197,11 @@ class App extends Component{
 						<input 
 							id = "lastName"
 							type = "text"
-							value = {this.state.lastName}
+							value = {member.last_name}
 							name = "lastName"
 							placeholder="Last Name" 
-							onChange={this.handleChange}
+							onChange={e => this.setState({member: {...member, last_name: e.target.value}})}
+							
 							ref = {(last) => this.last = last}
 						/>
 						<br />
@@ -183,10 +210,10 @@ class App extends Component{
 						<input 
 							id = "firstName"
 							type = "text"
-							value = {this.state.firstName}
+							value = {member.first_name}
 							name = "firstName"
 							placeholder="First Name" 
-							onChange={this.handleChange}
+							onChange={e => this.setState({member: {...member, first_name: e.target.value}})}
 							ref = {(first) => this.first = first}
 						/>
 						<br />
@@ -195,10 +222,10 @@ class App extends Component{
 						<input 
 							id = "email"
 							type = "text"
-							value = {this.state.email}
+							value = {member.email_address}
 							name = "email"
 							placeholder="Email Address" 
-							onChange={this.handleChange}
+							onChange={e => this.setState({member: {...member, email_address: e.target.value}})}
 							ref = {(mail) => this.mail = mail}
 						/>
 						<br />
@@ -207,10 +234,10 @@ class App extends Component{
 						<input 
 							id = "position"
 							type = "text"
-							value = {this.state.position}
+							value = {member.position}
 							name = "position"
 							placeholder="Position" 
-							onChange={this.handleChange}
+							onChange={e => this.setState({member: {...member, position: e.target.value}})}
 							ref = {(pos) => this.pos = pos}
 						/>
 						<br />
@@ -219,10 +246,10 @@ class App extends Component{
 						<input 
 							id = "town"
 							type = "text"
-							value = {this.state.town}
+							value = {member.town}
 							name = "town"
 							placeholder="Town" 
-							onChange={this.handleChange}
+							onChange={e => this.setState({member: {...member, town: e.target.value}})}
 							ref = {(town) => this.town = town}
 						/>
 						<br />
@@ -246,8 +273,11 @@ class App extends Component{
   							<option value="descending">Descending</option>
 						</select>
 
-						
-						
+						<br />
+						<br />
+						<div className = "myBox">
+							{members.map(this.renderMember)}
+						</div>
 						<br />
 						<br />
 
