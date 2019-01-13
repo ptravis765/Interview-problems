@@ -61,10 +61,20 @@ class App extends Component{
 				[name]: checked
 			})
 		}else{
-			this.setState({
-				//[event.target.name]: event.target.value
-				[name]: value
-			})
+			if(type === "text"){
+				this.setState({
+					//[event.target.name]: event.target.value
+					[name]: value
+				})
+				this.getMembers();
+			}else{
+				if(value === "ascending")
+				{
+					this.getAscMembers();
+				}else if(value === "descending"){
+					this.getDesMembers();
+				}
+			}
 		}
 	}
 
@@ -174,7 +184,29 @@ class App extends Component{
       .then(response => this.setState({members: response.data}))
       .catch(err => console.error(err))
   	}
-  	renderMember = ({last_name,first_name,email_address,position,town}) => <div name = {last_name}><br/>{last_name} {first_name}<br/>{email_address}<br/>{position}, {town}<br/></div>
+
+  	getAscMembers(){
+  		fetch('http://localhost:5000/description/asc')
+      		.then(response => response.json())
+      		.then(response => this.setState({members: response.data}))
+      		.catch(err => console.error(err))
+  	}
+
+  	getDesMembers(){
+  		fetch('http://localhost:5000/description/des')
+      		.then(response => response.json())
+      		.then(response => this.setState({members: response.data}))
+      		.catch(err => console.error(err))
+  	}
+
+  	renderMember = ({last_name,first_name,email_address,position,town}) => 
+  		<div name = {last_name}>
+
+  			<br/>{last_name} {first_name}
+  			<br/>{email_address}
+  			<br/>{position}, {town}
+  			<br/>
+  		</div>
   	
   	addMember() {
     	const {member} = this.state;
@@ -269,6 +301,7 @@ class App extends Component{
 							onChange={this.handleChange}
 							name = "sort"
 						>
+							<option value = "">Choose One</option>
   							<option value="ascending">Ascending</option>
   							<option value="descending">Descending</option>
 						</select>
