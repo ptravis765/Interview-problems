@@ -123,7 +123,7 @@ app.get('/description/asc', (req,res) =>{
 });
 
 app.get('/description/des', (req,res) =>{
-	//URL to use is http://localhost:5000/description
+	//URL to use is http://localhost:5000/description/des
 	connection.query(ORDER_BY_DESCENDING,(err, results)=>{
 		if(err){
 			return res.send(err)
