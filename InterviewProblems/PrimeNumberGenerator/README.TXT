@@ -11,3 +11,7 @@ VERSION or DATE: 1/7/19
 HOW TO START THIS PROJECT:
 AUTHORS: Travis Peterson
 USER INSTRUCTIONS:
+When the main code is active it will ask for the user to enter 2 numbers each one at a time. This is to ensure 
+that only numbers will be entered as well as to later on make sure that the smallest number of the 2 will
+be the first number to be used. Then an output will be shown showing all of the prime numbers between the 
+2 numbers

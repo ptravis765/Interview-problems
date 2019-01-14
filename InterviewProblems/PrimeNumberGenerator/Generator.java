@@ -1,6 +1,12 @@
 import java.util.*;
 /**
- * Write a description of class Generator here.
+ * This program uses 2 functions and also uses an interface class.
+ *
+ * The boolean isPRime function will take in a number value and see if it is
+ * a prime number
+ * 
+ * The List<Integer> generate class is used in order to create a list of
+ * numbers that are between the 'startingValue' and 'endingValue'
  *
  * Travis Peterson
  * 1/7/19

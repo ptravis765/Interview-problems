@@ -1,7 +1,19 @@
 import java.io.*;
 import java.util.*;
 /**
- * Write a description of class main here.
+ * This program uses 2 functions. A main function and a boolean isInteger 
+ * function.
+ * 
+ * The isInteger class takes in an object and checks to see if it is
+ * an integer number. It will return true if so and return false if not
+ * 
+ * The main class will take in output from the user. 2 numbers to be specific.
+ * And only numbers will be accepted, anything else and the user will be put
+ * into a while loop that will repeat until a number is entered. After 2
+ * numbers are entered the Generator class will be called to create a 
+ * generator object that will be used to call the List<generate>() function
+ * which will generate a list of all the prime numbers between the 2 numbers
+ * entered.
  *
  * Travis Peterson
  * 1/7/19

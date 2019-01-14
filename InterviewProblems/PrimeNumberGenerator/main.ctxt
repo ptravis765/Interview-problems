@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=main
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ main\ here.\r\n\r\n\ Travis\ Peterson\r\n\ 1/7/19\r\n
+comment0.text=\r\n\ This\ program\ uses\ 2\ functions.\ A\ main\ function\ and\ a\ boolean\ isInteger\ \r\n\ function.\r\n\ \r\n\ The\ isInteger\ class\ takes\ in\ an\ object\ and\ checks\ to\ see\ if\ it\ is\r\n\ an\ integer\ number.\ It\ will\ return\ true\ if\ so\ and\ return\ false\ if\ not\r\n\ \r\n\ The\ main\ class\ will\ take\ in\ output\ from\ the\ user.\ 2\ numbers\ to\ be\ specific.\r\n\ And\ only\ numbers\ will\ be\ accepted,\ anything\ else\ and\ the\ user\ will\ be\ put\r\n\ into\ a\ while\ loop\ that\ will\ repeat\ until\ a\ number\ is\ entered.\ After\ 2\r\n\ numbers\ are\ entered\ the\ Generator\ class\ will\ be\ called\ to\ create\ a\ \r\n\ generator\ object\ that\ will\ be\ used\ to\ call\ the\ List<generate>()\ function\r\n\ which\ will\ generate\ a\ list\ of\ all\ the\ prime\ numbers\ between\ the\ 2\ numbers\r\n\ entered.\r\n\r\n\ Travis\ Peterson\r\n\ 1/7/19\r\n
 comment1.params=object
 comment1.target=boolean\ isInteger(java.lang.Object)
 comment2.params=
