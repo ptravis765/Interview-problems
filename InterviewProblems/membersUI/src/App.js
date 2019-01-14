@@ -55,18 +55,19 @@ class App extends Component{
 				})
 				this.getMembers();
 			}else{
-				console.log("selection");
+				//console.log("selection");
 				this.setState({
 					[name]: value
 				})
+				//console.log(value);
 				if(value === "asc"){
-					console.log("ascending");
+					//console.log("ascending");
 					this.getAscMembers();
 				}else if(value === "des"){
-					console.log("descending");
+					//console.log("descending");
 					this.getDesMembers();
-				}else if(value === "choose"){
-					console.log("default");
+				}else if(value === "default"){
+					//console.log("default");
 					this.getMembers();
 				}
 			}
@@ -158,10 +159,11 @@ class App extends Component{
   	input type*/
   	renderMember = (({last_name,first_name,email_address,position,town}) => 
   		<div>
-  			<input type="checkbox" value={email_address} name = {last_name} onChange={this.handleChange} ref = {(mail) => this.mail = mail}/>
+  			<input type="checkbox" value={email_address} name = {email_address} onChange={this.handleChange} ref = {(mail) => this.mail = mail}/>
   			<br/>{last_name} {first_name}
   			<br/>{email_address}
-  			<br/>{position}, {town}
+  			<br/>{position} 
+  			<br/>{town}
   			<br/>
   			<br/>
   		</div>
@@ -275,7 +277,7 @@ class App extends Component{
 							onChange={this.handleChange}
 							name = "sort"
 						>
-							<option value = "choose">Choose One</option>
+							<option value = "default">Default</option>
 							<option value="des">Descending</option>
   							<option value="asc">Ascending</option>
   							

@@ -31,21 +31,10 @@
 	padding: 30px;
 }
 
-.todo-item{
-	display: flex;
-	justify-content: flex-start;
-	align-items: center;
-	padding: 30px 20px 0;
-	width: 70px;
-	border-bottom: 1px solid #cecece;
-	font-family: Roboto, sans-serif;
-	font-weight: 100;
-	font-size: 15px;
-	color: #333333;
-}
 
 input[type=checkbox]{
 	margin-right: 10px;
+  border-style: solid;
 }
 
 div.addMember{
@@ -79,7 +68,7 @@ div.output{
   	margin: auto;
   	position: relative;
   	width: 500px;
-  	height: 330px;
+  	height: 360px;
   	font-family: Tahoma, Geneva, sans-serif;
   	font-size: 14px;
   	font-style: italic;
@@ -110,10 +99,16 @@ div.output{
 }
 
 .myBox {
-border: none;
 padding: 5px;
 font: 20px/36px sans-serif;
-width: 450px;
+width: 350px;
 height: 200px;
 overflow: scroll;
+margin-left: 30px;
+background-color: white;
+border-style: solid;
+border-color: black;
 }
+
+.indent{margin-left: 30px;}
+
