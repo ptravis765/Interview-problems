@@ -1,0 +1,1 @@
+Inside this github contains the code I used in order to try and complete the challenges given to me by the company IPPSec as a way to interview me for an internship position. These problems are all explained in the "Interview Chalenges.docx" file and the code is in the InterviewProblems folder.
