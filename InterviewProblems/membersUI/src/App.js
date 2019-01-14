@@ -5,29 +5,7 @@ import React, {Component} from 'react';
 //import {View, Text, StyleSheet, TextInput, TouchableOpacity, ActivityIndicator, Platform} from 'react-native';
 //const $ = window.$;
 
-//import members from "./Components/members.js"
-//import memberLayout from "./Components/memberLayout.js"
 
-/*var mysql      = require('mysql');
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : '',
-  database : 'members'
-});
-
-connection.connect();
-
-connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
-  if (error) throw error;
-  console.log('The solution is: ', results[0].solution);
-});
-
-connection.end();*/
-
-/*const express = require('express');
-const bodyParser = require('body-parser');
-const mysql = require('mysql');*/
 
 class App extends Component{
 	constructor(){
@@ -51,133 +29,101 @@ class App extends Component{
 		}
 		this.handleChange = this.handleChange.bind(this)
 		this.handleSubmit = this.handleSubmit.bind(this)
+		this.handleRemove = this.handleRemove.bind(this)
+		this.getAscMembers = this.getAscMembers.bind(this)
+		this.getDesMembers = this.getDesMembers.bind(this)
+		this.getMembers = this.getMembers.bind(this)
 	}
 
+	/*handleChange() is called whenever one of the input elements like
+	'selection' or 'text' change their values. This function will change give
+	the 'name', 'value', and 'type' their own values*/
 	handleChange(event){
-		const {name, value, type, checked} = event.target
+		const {name, value, type} = event.target
+		const {member} = this.state;
 		if(type === "checkbox")
 		{
+			console.log("THE VALUE IS " + value);
 			this.setState({
-				[name]: checked
+				[name]: value
 			})
-		}else{
+		}else
 			if(type === "text"){
+				console.log("text");
 				this.setState({
-					//[event.target.name]: event.target.value
 					[name]: value
 				})
 				this.getMembers();
 			}else{
-				if(value === "ascending")
-				{
+				console.log("selection");
+				this.setState({
+					[name]: value
+				})
+				if(value === "asc"){
+					console.log("ascending");
 					this.getAscMembers();
-				}else if(value === "descending"){
+				}else if(value === "des"){
+					console.log("descending");
 					this.getDesMembers();
+				}else if(value === "choose"){
+					console.log("default");
+					this.getMembers();
 				}
 			}
-		}
+		
 	}
 
+	/*handleSubmit() is called in order to add a new member to the database
+	only when the user enters a 'last_name', 'first_name', and 'email_address'
+	into the form before hitting the submit button that calls this function
+	and refreshes the page afterward to display the contents of the database
+	after the function is used*/
 	handleSubmit(event){
 		const {member} = this.state;
-		/*var data = require('./members.json');
-		for(var i = 0; i < data.length; i++){
-			var obj = data[i];
-			console.log("Name: " + obj.last_name);
-		}*/
 		if(member.last_name === "" || member.first_name === "" || member.email_address === "")
 		{
 			alert("Enter a value in the required fields:\n\n Last Name   First Name   Email Address");
 		}else{
-			/*var data={
-				last_name: this.last.value,
-				first_name: this.first.value,
-				email: this.mail.value,
-				position: this.pos.value,
-				town: this.town.value
-			};*/
-			/*axios.post(
-				'http://localhost/phpmyadmin/my-app/src/submit.php',{
-					form_data:{
-						last_name: this.last.value,
-						first_name: this.first.value,
-						email: this.mail.value,
-						position: this.pos.value,
-						town: this.town.value
-					}
-					
-				}
-			)
-			.then(response =>{
-				console.log(response)
-				console.log(response.form_data)
-				this.filter = response.form_data
-			})*/
 			this.addMember();
 			window.location.reload(false);
 
-			alert('the values are: ' + this.last.value + ', ' + this.first.value + ', ' + this.mail.value + ', ' + this.pos.value + ', ' + this.town.value);
+			alert('the values are: ' + this.last.value + ', ' + this.first.value + ', ' + member.email_address + ', ' + this.pos.value + ', ' + this.town.value);
 		}
     	event.preventDefault();
 
     	
 	}
 
-	componentDidMount(){
-		/*jquery.ajax({
-       		url: "./members.json",
-       		type: "GET",
-       		dataType: 'json',
-       		ContentType: './members.json',
-       		success: function(data) {
-         
-         		this.setState({data: data});
-       		}.bind(this),
-       		error: function(jqXHR) {
-         		console.log(jqXHR);
-       		}*//*.bind(this),
-      		error: function(xhr, status, err) {
-        		console.error(this.props.url, status, err.toString());
-      		}.bind(this)*/
-    	//});
+	/*handleRemove() is called with the check box form and deletes the element
+	that is checked from the database and refreshes the page to display the contents
+	of the database after the function is used*/
+	handleRemove(event)
+	{
+		const {name, value, type, checked} = event.target
+		const {member} = this.state;
+		alert("YOU ARE DELETING " + this.mail.value);
+    	fetch(`http://localhost:5000/description/del?email_address=${this.mail.value}`)     	
+      	.then(response => response.json())
+      	.then(response => this.setState({members: response.data}))
+      	.catch(err => console.error(err))
+		window.location.reload(false);
+	}
 
-    	/*fetch('./members.json',{
-    		headers:{
-    			'Content-Type': 'application/json',
-        		'Accept': 'application/json'
-    		}
-    	})
-    		.then((response) => response.json())
-    		.then((findresponse)=>{
-    			this.setState({
-    				data:findresponse
-    			});
-    		})*/
-    	/*axios.get('./members.json')
-    		.then(res =>{
-    			console.log(res.data[0].last_name);
-    			this.setState(
-    				{array: res.data}
-    			);
-    		//this.setState({members: res.data});
-    		})
-    		.catch((err)=>{})*/
+	/*componentDidMount() is the function that activates the moment the
+	page successfully loads. This will call the getMembers() function 
+	which allows the users to immediatley see a list of all the members
+	currently in the database*/
+	componentDidMount(){
+		
     		
     	this.getMembers();
   
 	}
 
-	handleMembers(){
-		return this.state.data.map((mem) => {
-			return(
-				<tr>
-					<td>{mem.last_name}</td>
-				</tr>
-			);
-		})
-	}
-
-	//getMembers = _=>
+	
+	/*getMembers() uses a fetch() command in order to get the data from
+	the given url. This data is from the database and it is converted into
+	json data and is then displayed onto the web page*/
 	getMembers(){
     fetch('http://localhost:5000/description')
       .then(response => response.json())
@@ -185,13 +131,20 @@ class App extends Component{
       .catch(err => console.error(err))
   	}
 
+  	/*getAscMembers() uses a fetch() command in order to get the data from
+	the given url. This data is from the database and it is converted into
+	json data and is then displayed onto the web page in ascending order*/
   	getAscMembers(){
   		fetch('http://localhost:5000/description/asc')
       		.then(response => response.json())
       		.then(response => this.setState({members: response.data}))
       		.catch(err => console.error(err))
+      	
   	}
 
+  	/*getAscMembers() uses a fetch() command in order to get the data from
+	the given url. This data is from the database and it is converted into
+	json data and is then displayed onto the web page in descending order*/
   	getDesMembers(){
   		fetch('http://localhost:5000/description/des')
       		.then(response => response.json())
@@ -199,22 +152,43 @@ class App extends Component{
       		.catch(err => console.error(err))
   	}
 
-  	renderMember = ({last_name,first_name,email_address,position,town}) => 
-  		<div name = {last_name}>
 
+  	/*rendermember is used later on in order to help create a 'map' of the
+  	data we get from the url pages and give each of those elements a checkbox
+  	input type*/
+  	renderMember = (({last_name,first_name,email_address,position,town}) => 
+  		<div>
+  			<input type="checkbox" value={email_address} name = {last_name} onChange={this.handleChange} ref = {(mail) => this.mail = mail}/>
   			<br/>{last_name} {first_name}
   			<br/>{email_address}
   			<br/>{position}, {town}
   			<br/>
+  			<br/>
   		</div>
+  	)
   	
+  	/*addMember() is just an easier way to call the code needed to add 
+  	a new person to the database*/
   	addMember() {
     	const {member} = this.state;
     	fetch(`http://localhost:5000/description/add?last_name=${member.last_name}&first_name=${member.first_name}&email_address=${member.email_address}&position=${member.position}&town=${member.town}`)     	
       	.then(response => response.json())
-      	.then(this.getProducts)
+      	.then(response => this.setState({members: response.data}))
       	.catch(err => console.error(err))
   	}
+
+  	/*delMember() is just an easier way to call the code needed to remove
+  	a person from the database*/
+  	delMember() {
+    	const {member} = this.state;
+
+    	fetch(`http://localhost:5000/description/del?email_address=${member.email_address}`)     	
+      	.then(response => response.json())
+      	.then(response => this.setState({members: response.data}))
+      	.catch(err => console.error(err))
+  	}
+
+ 
 
 	render(){
 		const {members, member} = this.state;
@@ -291,7 +265,7 @@ class App extends Component{
 					</div>
 				</form>
 
-				<form>
+				
 					<div className = "output">
 						<br/>
 						<label>Team member list: </label>
@@ -301,9 +275,10 @@ class App extends Component{
 							onChange={this.handleChange}
 							name = "sort"
 						>
-							<option value = "">Choose One</option>
-  							<option value="ascending">Ascending</option>
-  							<option value="descending">Descending</option>
+							<option value = "choose">Choose One</option>
+							<option value="des">Descending</option>
+  							<option value="asc">Ascending</option>
+  							
 						</select>
 
 						<br />
@@ -316,10 +291,10 @@ class App extends Component{
 
 						<button>Load</button>
 						<button>Save</button>
-						<button>Remove</button>
+						<button onClick={this.handleRemove}>Remove</button>
 
 					</div>
-				</form>
+				
 					
 
 			</main>
