@@ -1,0 +1,1 @@
+This folder holds all the problems I have done on the side during this interview challenge in order to better understand how to use ReactJS as before this interview I have never once worked with React or Javascript in the way IPPSec wanted me to.
