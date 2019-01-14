@@ -5,3 +5,5 @@ From my research this seems to be a good way in order to connect to a database a
 queries while using ReactJS.
 
 To activate this 'index.js' file then you must go to the folder in command prompt and enter 'codemon index.js'
+
+You can also use 'server.js'. They both contains the same code. One was just created as a backupfor the other.
